@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="A serverless to-do app built on AWS with Lambda, DynamoDB and CloudFront" />
+  <meta name="theme-color" content="#6c63ff" />
+  <title>My To-Do App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>My To-Do List</h1>
+
+    <div class="input-row">
+      <input type="text" id="todoInput" placeholder="What needs to be done?" aria-label="New to-do item" />
+      <button onclick="addTodo()" aria-label="Add to-do item">Add</button>
+    </div>
+
+    <ul id="todoList" aria-label="To-do list">
+      <!-- To-do items appear here -->
+    </ul>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
