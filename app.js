@@ -1,8 +1,24 @@
-// Azure version: the API lives at /api on the same domain,
-// so there is no API URL to paste in and no CORS to configure.
 const API_URL = "/api";
 
-window.onload = loadTodos;
+// On page load: ask Azure who is signed in
+window.onload = async function () {
+  let user = null;
+  try {
+    const res = await fetch("/.auth/me");
+    user = (await res.json()).clientPrincipal; // null when signed out
+  } catch (err) {
+    console.error("Could not check sign-in status:", err);
+  }
+
+  if (!user) {
+    document.getElementById("loginScreen").hidden = false;
+    return;
+  }
+
+  document.getElementById("userName").textContent = user.userDetails;
+  document.getElementById("appScreen").hidden = false;
+  loadTodos();
+};
 
 async function loadTodos() {
   try {
@@ -60,7 +76,7 @@ function renderTodos(todos) {
     if (todo.done) li.className = "done";
 
     const span = document.createElement("span");
-    span.textContent = todo.text; // textContent avoids script injection
+    span.textContent = todo.text;
 
     const actions = document.createElement("div");
     actions.className = "todo-actions";

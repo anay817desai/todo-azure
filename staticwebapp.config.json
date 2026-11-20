@@ -1,5 +1,9 @@
 {
   "platform": {
     "apiRuntime": "node:20"
-  }
+  },
+  "routes": [
+    { "route": "/api/*", "allowedRoles": ["authenticated"] },
+    { "route": "/.auth/login/aad", "statusCode": 404 }
+  ]
 }

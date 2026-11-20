@@ -3,24 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="A serverless to-do app built on AWS with Lambda, DynamoDB and CloudFront" />
+  <meta name="description" content="A serverless to-do app built on Azure with Static Web Apps, Functions and Cosmos DB" />
   <meta name="theme-color" content="#6c63ff" />
   <title>My To-Do App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="container">
-    <h1>My To-Do List</h1>
+  <!-- Shown when the visitor is NOT signed in -->
+  <div class="container" id="loginScreen" hidden style="text-align:center;">
+    <h1>My To-Do App</h1>
+    <p style="color:#666; margin-bottom:32px;">Sign in to see your personal to-do list</p>
+    <button type="button" onclick="location.href='/.auth/login/github'" style="padding:14px 40px; font-size:16px;">Sign in with GitHub</button>
+  </div>
+
+  <!-- Shown when the visitor IS signed in -->
+  <div class="container" id="appScreen" hidden>
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px;">
+      <h1 style="margin:0;">My To-Do List</h1>
+      <div style="text-align:right;">
+        <p id="userName" style="font-size:13px; color:#666; margin-bottom:6px;"></p>
+        <button type="button" onclick="location.href='/.auth/logout'" style="padding:6px 14px; font-size:13px; background:#eee; color:#333;">Sign out</button>
+      </div>
+    </div>
 
     <div class="input-row">
       <input type="text" id="todoInput" placeholder="What needs to be done?" aria-label="New to-do item" />
       <button onclick="addTodo()" aria-label="Add to-do item">Add</button>
     </div>
 
-    <ul id="todoList" aria-label="To-do list">
-      <!-- To-do items appear here -->
-    </ul>
+    <ul id="todoList" aria-label="To-do list"></ul>
   </div>
 
   <script src="app.js"></script>
